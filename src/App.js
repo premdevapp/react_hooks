@@ -1,14 +1,18 @@
-import {useLayoutEffect, useEffect} from "react";
-import "./App.css"
+import { useLayoutEffect, useEffect, useRef } from "react";
+import "./App.css";
 const App = () => {
-useLayoutEffect(() => {})
-useEffect(() => {})
+  const devRef = useRef(null);
+  useLayoutEffect(() => {
+    console.log(devRef.current.value);
+  }, []);
+  useEffect(() => {
+    devRef.current.value = "HELLO"
+  }, []);
   return (
     <div className="App">
-      <p>{counter}</p>
-      <button onClick={() => setCounter((prev)=>prev + 1)}>+</button>
+      <input ref={devRef} defaultValue="Prem" style={{width: "2rem", height: "1.2rem"}} />
     </div>
-  )
-}
+  );
+};
 
 export default App;
