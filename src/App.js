@@ -1,7 +1,8 @@
-import {useState} from "react";
+import {useLayoutEffect, useEffect} from "react";
 import "./App.css"
 const App = () => {
-const [counter, setCounter] = useState(0);
+useLayoutEffect(() => {})
+useEffect(() => {})
   return (
     <div className="App">
       <p>{counter}</p>
