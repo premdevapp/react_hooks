@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import { useReducer } from "react"
+import "./App.css"
+
+const initialState = {
+  counter: 0,
+  isVisible: true,
+}
+const reducer = (state = initialState, action) => {
+  switch (action.type) {
+    case "INCREMENT":
+      return {...state, counter: state.counter + 1}
+    case "TOGGLE":
+      return {...state, isVisible: !state.isVisible}
+    default:
+      return state;
+  }
 }
 
-export default App;
+const App = () => {
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const handleClick = () => {
+    dispatch({ type: "INCREMENT" });
+    dispatch({ type: "TOGGLE" });
+  }
+  return (
+    <div className="App">
+      <p>{state.counter}</p>
+      <button onClick={handleClick}>Click</button>
+      {state.isVisible && <p>I am Visible</p>}
+    </div>
+  )
+}
+
+export default App
